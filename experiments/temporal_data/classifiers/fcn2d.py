@@ -2,10 +2,10 @@ import tensorflow.keras as keras
 import tensorflow as tf
 import numpy as np
 
-class Classifier_FCN:
+class Classifier_FCN2D:
 
 	def __init__(self, input_shape, nb_classes, verbose=True, build=True, lr=0.0001):
-		self.output_directory = 'out_fcn'
+		self.output_directory = 'out_fcn2d'
 		if build == True:
 			self.model = self.build_model(input_shape, nb_classes, lr=lr)
 			if(verbose==True):
@@ -16,19 +16,19 @@ class Classifier_FCN:
 	def build_model(self, input_shape, nb_classes, lr=0.0001):
 		input_layer = keras.layers.Input(input_shape)
 
-		conv1 = keras.layers.Conv1D(filters=128, kernel_size=8, padding='same')(input_layer)
+		conv1 = keras.layers.Conv2D(filters=128, kernel_size=(8, 8), padding='same')(input_layer)
 		conv1 = keras.layers.BatchNormalization()(conv1)
 		conv1 = keras.layers.Activation(activation='relu')(conv1)
 
-		conv2 = keras.layers.Conv1D(filters=256, kernel_size=5, padding='same')(conv1)
+		conv2 = keras.layers.Conv2D(filters=256, kernel_size=(5, 5), padding='same')(conv1)
 		conv2 = keras.layers.BatchNormalization()(conv2)
 		conv2 = keras.layers.Activation('relu')(conv2)
 
-		conv3 = keras.layers.Conv1D(128, kernel_size=3,padding='same')(conv2)
+		conv3 = keras.layers.Conv2D(128, kernel_size=(3, 3),padding='same')(conv2)
 		conv3 = keras.layers.BatchNormalization()(conv3)
 		conv3 = keras.layers.Activation('relu')(conv3)
 
-		gap_layer = keras.layers.GlobalAveragePooling1D()(conv3)
+		gap_layer = keras.layers.GlobalAveragePooling2D()(conv3)
 
 		output_layer = keras.layers.Dense(1, activation='sigmoid')(gap_layer)
 
