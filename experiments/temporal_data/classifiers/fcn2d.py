@@ -16,15 +16,15 @@ class Classifier_FCN2D:
 	def build_model(self, input_shape, nb_classes, lr=0.0001):
 		input_layer = keras.layers.Input(input_shape)
 
-		conv1 = keras.layers.Conv2D(filters=128, kernel_size=(8, 8), padding='same')(input_layer)
+		conv1 = keras.layers.Conv2D(filters=64, kernel_size=(7, 7), padding='same')(input_layer)
 		conv1 = keras.layers.BatchNormalization()(conv1)
 		conv1 = keras.layers.Activation(activation='relu')(conv1)
 
-		conv2 = keras.layers.Conv2D(filters=256, kernel_size=(5, 5), padding='same')(conv1)
+		conv2 = keras.layers.Conv2D(filters=128, kernel_size=(5, 5), padding='same')(conv1)
 		conv2 = keras.layers.BatchNormalization()(conv2)
 		conv2 = keras.layers.Activation('relu')(conv2)
 
-		conv3 = keras.layers.Conv2D(128, kernel_size=(3, 3),padding='same')(conv2)
+		conv3 = keras.layers.Conv2D(64, kernel_size=(3, 3),padding='same')(conv2)
 		conv3 = keras.layers.BatchNormalization()(conv3)
 		conv3 = keras.layers.Activation('relu')(conv3)
 
