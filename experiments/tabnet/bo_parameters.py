@@ -19,8 +19,8 @@ SEARCH_SPACE_TABNET = [
     Integer(3, 10, name='n_steps'),
     Categorical([8, 16, 24, 32, 64], name='n_a'),
     Categorical([0.6, 0.7, 0.8, 0.9, 0.95, 0.98], name='momentum'),
-    Categorical([4096, 8192], name='batch_size'),
-    Categorical([128, 256], name='virtual_batch_size'),
+#     Categorical([4096, 8192], name='batch_size'),
+#     Categorical([128, 256], name='virtual_batch_size'),
 ]
 
 LIGHTGBM_PARAMS = {
